@@ -1,0 +1,38 @@
+body {
+    background-color: #FFC0CB;
+    opacity: 0.8;
+}
+
+h1 {
+    color: #ce0d6eb1;
+    text-align: center;
+}
+
+h2 {
+    color: #ce0d6eb1;
+    text-align: center;
+}
+
+p {
+    color: #ce0d6eb1;
+    font-size: 18px;
+    text-align: center;
+}
+
+li {
+    color: #ce0d6eb1;
+    font-size: 18px;
+    text-align: left;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.image-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
