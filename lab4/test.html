@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>CinemaApp</title>
+    </head>
+
+    <body bgcolor=#8A0303 text=#ffffff>
+
+        <center>
+
+            <!-- 1a -->
+            <h1>Cinema App</h1>
+            <h2>Your favorite movie catalog.</h2>
+
+            <p>Welcome! Here you can <strong>add</strong>, <b>search</b> and <em>manage</em> your favorite movies.</p>
+            <img src="images/removiepost.jpg" alt="Resident Evil Movie poster" width="200" height="300" title="BE the Nemesis">
+
+            <div style="height: 60px;">
+                <span>Additional info: RE movies are the best!!</span>
+            </div>
+
+            <!-- 1b -->
+            <form id="form">
+                <fieldset style="width: 300px;">
+                    <legend>Add Movie</legend>
+
+                    <br>
+                    <input type="text" name="title" maxlength="100" size="30" value="" placeholder="Enter movie title">
+                    <br><br>
+
+                    <input type="number" name="year" min="1900" max="2025" step="1" value="2024">
+                    <br><br>
+
+                    <select name="genre" multiple>
+                        <option>Action</option>
+                        <option selected>Comedy</option>
+                        <option>Drama</option>
+                        <option>Horror</option>
+                        <option>Sci-Fi</option>
+                    </select>
+                    <br><br>
+
+                    <input type="checkbox" name="watched" checked> Watched
+                    <input type="checkbox" name="favorite"> Favorite
+                    <input type="checkbox" name="unavailable" disabled> Unavailable
+                    <br><br>
+
+                    <input type="radio" name="format" value="dvd"> DVD
+                    <input type="radio" name="format" value="bluray"> Blu-ray
+                    <br><br>
+
+                    <textarea readonly cols="30" rows="5">No description available.</textarea>
+                    <br><br>
+
+                    <input type="submit">
+                    <input type="reset">
+
+                </fieldset>
+            </form>
+
+            <br>
+
+            <!-- 1c -->
+            <table id="tabelFilme" border="1" width="500" bgcolor="#610808" align="center">
+                <tr>
+                    <th>Title</th>
+                    <th>Director</th>
+                    <th>Year</th>
+                    <th>Rating</th>
+                </tr>
+                <tr>
+                    <td>Resident Evil</td>
+                    <td rowspan="2">Paul W.S. Anderson</td>
+                    <td>2002</td>
+                    <td>6.7</td>
+                </tr>
+                <tr>
+                    <td>Resident Evil: Apocalypse</td>
+                    <td>2004</td>
+                    <td>6.2</td>
+                </tr>
+                <tr>
+                    <td>Resident Evil: Extinction</td>
+                    <td>Russell Mulcahy</td>
+                    <td>2007</td>
+                    <td>6.1</td>
+                </tr>
+                <tr>
+                    <td>Resident Evil: Afterlife</td>
+                    <td rowspan="3">Paul W.S. Anderson</td>
+                    <td>2010</td>
+                    <td>5.9</td>
+                </tr>
+                <tr>
+                    <td>Resident Evil: Retribution</td>
+                    <td>2012</td>
+                    <td>5.4</td>
+                </tr>
+                <tr>
+                    <td>Resident Evil: The Final Chapter</td>
+                    <td>2016</td>
+                    <td>5.5</td>
+                </tr>
+                <tr>
+                    <td colspan="4" align="center" valign="middle">Total movies: 6</td>
+                </tr>
+            </table>
+            <br><span>The movies were better than the ratings!</span>
+
+            <br>
+            <hr>
+
+            <!-- 1d -->
+            <ol start="1" type="I">
+                <li>Open the app</li>
+                <li>Click Add Movie</li>
+                <li>Fill in the form</li>
+                <li>Press Submit</li>
+            </ol>
+
+            <hr width="500">
+
+            <ul>
+                <li>Action</li>
+                <li>Comedy</li>
+                <li>Drama</li>
+                <li>Horror</li>
+                <li>Sci-Fi</li>
+            </ul>
+
+            <hr>
+
+            <a href="https://www.imdb.com" name="imdb" target="_blank">IMDB</a>
+            <br>
+            <a href="https://www.rottentomatoes.com" name="rottentomatoes" target="_blank">Rotten Tomatoes</a>
+
+            <br><br>
+
+            <a href="#form">Go to Add Movie form</a>
+
+            <hr>
+
+        </center>
+
+        <script>
+            // 2a
+            var numeCinema = "CinemaApp";
+            let nrFilme = 6;
+            const pretBilet = 35.5;
+
+            alert(numeCinema);
+            console.log(nrFilme);
+            document.write("<p>" + pretBilet + "</p>");
+
+            // 2b
+            function calculeazaCostBilete(pretBilet, nrPersoane) {
+                if (nrPersoane > 5) {
+                    return pretBilet * nrPersoane * 0.8;
+                }
+                return pretBilet * nrPersoane;
+            }
+
+            var calculeazaRatingMediu = function(rating1, rating2, rating3) {
+                var suma = rating1 + rating2 + rating3;
+                return (suma / 3).toFixed(1);
+            };
+
+            const formateazaInfo = (titlu, an, rating) => {
+                return titlu + " (" + an + ") - Rating: " + rating + "/10";
+            };
+
+            // 2c
+            let costGrup = calculeazaCostBilete(35.5, 7);
+            console.log("Cost grup (7 pers): " + costGrup);
+
+            let costNormal = calculeazaCostBilete(35.5, 3);
+            console.log("Cost normal (3 pers): " + costNormal);
+
+            let ratingMediu = calculeazaRatingMediu(8.5, 7.2, 9.0);
+            let info = formateazaInfo("Inception", 2010, ratingMediu);
+            console.log(info);
+        </script>
+
+        <script>
+            // 3a
+            var filme = [
+                { titlu: "Resident Evil", regizor: "Paul W.S. Anderson", an: 2002, rating: 8.7, gen: "Horror", vizionat: true },
+                { titlu: "Resident Evil: Apocalypse", regizor: "Paul W.S. Anderson", an: 2004, rating: 6.2, gen: "Horror", vizionat: true },
+                { titlu: "Resident Evil: Extinction", regizor: "Russell Mulcahy", an: 2007, rating: 6.1, gen: "Horror", vizionat: false },
+                { titlu: "Resident Evil: Afterlife", regizor: "Paul W.S. Anderson", an: 2010, rating: 5.9, gen: "Action", vizionat: false },
+                { titlu: "Resident Evil: Retribution", regizor: "Paul W.S. Anderson", an: 2012, rating: 5.4, gen: "Action", vizionat: true },
+                { titlu: "Resident Evil: The Final Chapter", regizor: "Paul W.S. Anderson", an: 2016, rating: 5.5, gen: "Action", vizionat: false }
+            ];
+
+            filme.forEach(function(film) {
+                if (film.rating > 8.0) {
+                    console.log(film.titlu + " - " + film.rating);
+                }
+            });
+
+            var infoFilme = filme.map(function(film) {
+                return film.titlu + " (" + film.an + ") - Rating: " + film.rating + "/10";
+            });
+            console.log(infoFilme);
+
+            var nevizionate = filme.filter(function(film) {
+                return film.vizionat === false;
+            });
+            console.log(nevizionate);
+
+            var sumaRating = filme.reduce(function(total, film) {
+                return total + film.rating;
+            }, 0);
+            var mediaRating = (sumaRating / filme.length).toFixed(1);
+            console.log("Suma: " + sumaRating + " | Media: " + mediaRating);
+
+            // 3b
+            var cinema = {
+                nume: "CinemaApp",
+                oras: "Baia Mare",
+                filme: filme,
+
+                afiseazaCatalog: function() {
+                    this.filme.forEach(function(film) {
+                        console.log(film.titlu + " | " + film.regizor + " | " + film.an + " | " + film.rating + " | " + film.gen + " | Vizionat: " + film.vizionat);
+                    });
+                },
+
+                calculeazaRatingMediu: function() {
+                    var suma = this.filme.reduce(function(total, film) {
+                        return total + film.rating;
+                    }, 0);
+                    return (suma / this.filme.length).toFixed(1);
+                },
+
+                cautaFilm: function(titluFilm) {
+                    var gasit = this.filme.find(function(film) {
+                        return film.titlu === titluFilm;
+                    });
+                    return gasit ? gasit : "Film negasit!";
+                },
+
+                filtreazaDupaGen: function(gen) {
+                    return this.filme.filter(function(film) {
+                        return film.gen === gen;
+                    });
+                }
+            };
+
+            cinema.afiseazaCatalog();
+            console.log("Rating mediu: " + cinema.calculeazaRatingMediu());
+            console.log(cinema.cautaFilm("Resident Evil"));
+            console.log(cinema.cautaFilm("Titanic"));
+            console.log(cinema.filtreazaDupaGen("Horror"));
+        </script>
+
+        <script>
+            // 4a
+            var form = document.getElementById("form");
+
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                var titlu = document.getElementsByName("title")[0].value;
+                var an = document.getElementsByName("year")[0].value;
+                var genSelect = document.getElementsByName("genre")[0];
+                var genuriSelectate = Array.from(genSelect.selectedOptions);
+
+                if (titlu === "") {
+                    alert("Titlul nu poate fi gol!");
+                    return;
+                }
+                if (an < 1900 || an > 2026) {
+                    alert("Anul trebuie sa fie intre 1900 si 2026!");
+                    return;
+                }
+                if (genuriSelectate.length === 0) {
+                    alert("Selecteaza cel putin un gen!");
+                    return;
+                }
+
+                // 4b
+                var filmNou = {
+                    titlu: titlu,
+                    regizor: "Necunoscut",
+                    an: an,
+                    rating: 0,
+                    gen: genuriSelectate[0].value,
+                    vizionat: false
+                };
+
+                filme.push(filmNou);
+
+                var tabel = document.getElementById("tabelFilme").getElementsByTagName("tbody")[0];
+                var tr = document.createElement("tr");
+
+                var td1 = document.createElement("td");
+                td1.innerText = filmNou.titlu;
+                tr.appendChild(td1);
+
+                var td2 = document.createElement("td");
+                td2.innerText = filmNou.regizor;
+                tr.appendChild(td2);
+
+                var td3 = document.createElement("td");
+                td3.innerText = filmNou.an;
+                tr.appendChild(td3);
+
+                var td4 = document.createElement("td");
+                td4.innerText = filmNou.rating;
+                tr.appendChild(td4);
+
+                var ultimulRand = tabel.rows[tabel.rows.length - 1];
+                tabel.insertBefore(tr, ultimulRand);
+
+                ultimulRand.cells[0].innerText = "Total movies: " + filme.length;
+
+                alert("Film adaugat cu succes: " + filmNou.titlu);
+                form.reset();
+            });
+        </script>
+
+    </body>
+</html>
