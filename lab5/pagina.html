@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Test JS</title>
+</head>
+<body>
+
+<div style="display:flex; gap:20px;">
+  <div>
+    <textarea id="txt" rows="10" cols="40"></textarea>
+    <br>
+    <button onclick="run()">RUN</button>
+    <button onclick="clr()">CLEAR</button>
+  </div>
+  <div id="out" style="width:300px; min-height:150px; border:1px solid #000; padding:8px;"></div>
+</div>
+
+<ul>
+  <li><a href="javascript:load(0)">ex1</a></li>
+  <li><a href="javascript:load(1)">ex2</a></li>
+  <li><a href="javascript:load(2)">ex3</a></li>
+</ul>
+
+<script>
+const my = {
+  log: function(...args) {
+    document.getElementById("out").innerHTML += args.map(String).join(' ') + "<br>";
+  }
+};
+
+function run() {
+  document.getElementById("out").innerHTML = "";
+  let cod = document.getElementById("txt").value;
+  eval(cod);
+}
+
+function clr() {
+  document.getElementById("txt").value = "";
+  document.getElementById("out").innerHTML = "";
+}
+
+let ex = [
+  "my.log('hello world');",
+  "const v = [1,2,3]; v.forEach(x => my.log(x));",
+  "function f(){ my.log('gata'); } f();"
+];
+
+function load(i) {
+  document.getElementById("txt").value = ex[i];
+}
+</script>
+
+</body>
+</html>
