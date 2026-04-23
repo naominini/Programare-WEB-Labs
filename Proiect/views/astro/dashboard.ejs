@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/style.css">
+  <title>Dashboard</title>
+</head>
+<body>
+  <h1>✦ Online Astrology Consultation ✦</h1>
+  <p><i>Discover yourself through the wisdom of the stars</i></p>
+
+  <br>
+
+  <p>Bună, <strong><%= user.nume %></strong>! ✦</p>
+  <p>Vizite în sesiunea curentă: <%= views %></p>
+
+  <br>
+
+  <p>
+    Whether you are at a crossroads in life, curious about your deeper personality,
+    or simply drawn to explore what the cosmos has to say about your journey,
+    this platform offers a safe, thoughtful and professional space to do exactly that.
+  </p>
+
+  <br>
+
+  <h2>Consultații disponibile</h2>
+  <ul>
+    <% sessions.forEach(s => { %>
+      <li>
+        <a href="/astro/<%= s.id %>"><%= s.tip %></a>
+        — <%= s.durata %> — <%= s.pret %>
+      </li>
+    <% }) %>
+  </ul>
+
+  <br>
+
+  <a href="/logout">Logout</a>
+
+</body>
+</html>

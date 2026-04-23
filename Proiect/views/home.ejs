@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/style.css">
+  <title>Astrology Consultation</title>
+</head>
+<body>
+  <h1>✦ Online Astrology Consultation ✦</h1>
+  <p><i>Discover yourself through the wisdom of the stars</i></p>
+
+  <% if (user) { %>
+    <p>Bună, <%= user.nume %>!</p>
+    <a href="/astro">Mergi la dashboard</a>
+    <a href="/logout">Logout</a>
+  <% } else { %>
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+  <% } %>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/style.css">
+  <title>Register</title>
+</head>
+<body>
+  <h1>Înregistrare</h1>
+
+  <% if (error) { %>
+    <p style="color:red;"><%= error %></p>
+  <% } %>
+
+  <form method="POST" action="/register">
+    <label>Nume:</label>
+    <input type="text" name="nume" required>
+    <br>
+    <label>Email:</label>
+    <input type="email" name="email" required>
+    <br>
+    <label>Parolă:</label>
+    <input type="password" name="password" required>
+    <br>
+    <button type="submit">Înregistrează-te</button>
+  </form>
+
+  <p>Ai deja cont? <a href="/login">Login</a></p>
+
+</body>
+</html>

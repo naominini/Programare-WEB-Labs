@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/style.css">
+  <title><%= session.tip %></title>
+</head>
+<body>
+  <h1><%= session.tip %></h1>
+  <p><%= session.descriere %></p>
+
+  <h2>Detalii</h2>
+  <p>⏱ Durată: <%= session.durata %></p>
+  <p>💰 Preț: <%= session.pret %></p>
+
+  <h2>Ce include</h2>
+  <ul>
+    <% session.include.forEach(item => { %>
+      <li>✦ <%= item %></li>
+    <% }) %>
+  </ul>
+
+  <br>
+  <a href="/astro">Înapoi la dashboard</a>
+  <a href="/logout">Logout</a>
+
+</body>
+</html>
