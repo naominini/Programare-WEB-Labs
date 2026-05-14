@@ -1,0 +1,37 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+
+<h3>Cauta in baza de date:</h3>
+<input type="text" id="searchBox" placeholder="ex: node, react, mongo...">
+<button onclick="cauta()">Cauta</button>
+
+<div id="rezultat" style="margin-top:20px;"></div>
+
+<script>
+function cauta() {
+    var query = $("#searchBox").val();
+    if(query === '') return;
+
+    $.get("http://localhost:3000/find/" + query, function(data) {
+        if(data.length === 0) {
+            $("#rezultat").html("<p>Niciun rezultat gasit.</p>");
+            return;
+        }
+
+        var tabel = '<table border="1" cellpadding="8">';
+        tabel += '<tr><th>Request</th><th>Title</th></tr>';
+        data.forEach(function(item) {
+            tabel += '<tr><td>' + item.request + '</td><td>' + item.title + '</td></tr>';
+        });
+        tabel += '</table>';
+
+        $("#rezultat").html(tabel);
+    });
+}
+</script>
+
+</body>
+</html>

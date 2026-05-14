@@ -1,0 +1,51 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+
+<h3>Alege o imagine SVG:</h3>
+<select id="svgSelect">
+    <option value="">-- selecteaza --</option>
+    <option value="circle">Cerc</option>
+    <option value="rect">Dreptunghi</option>
+    <option value="star">Stea</option>
+</select>
+
+<div id="svgDisplay" style="margin-top:20px;"></div>
+
+<hr>
+<p result><!-- here --></p>
+<button>Send an HTTP POST request</button>
+
+<script>
+// SVG-uri inline generate la selectie
+var svgOptions = {
+    circle: '<svg width="100" height="100"><circle cx="50" cy="50" r="50" fill="blue"/></svg>',
+    rect: '<svg width="100" height="100"><rect width="100" height="100" fill="green"/></svg>',
+    star: '<svg width="100" height="100" viewBox="0 0 51 48"><path fill="gold" d="M25 1l6 17h18L35 29l5 17-15-10-15 10 5-17L1 18h18z"/></svg>'
+};
+
+$("#svgSelect").change(function() {
+    var val = $(this).val();
+    if(val) {
+        $("#svgDisplay").html(svgOptions[val]);
+    } else {
+        $("#svgDisplay").html('');
+    }
+});
+
+// POST request original din exemplu
+$(document).ready(function() {
+    $("button").click(function() {
+        $.post("http://localhost:8001/user",
+            { name: "Donald Duck", city: "Duckburg" },
+            function(data, status) {
+                alert("Data: " + data + "\nStatus: " + status);
+            });
+    });
+});
+</script>
+
+</body>
+</html>
