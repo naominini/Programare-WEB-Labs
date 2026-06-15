@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/style.css">
+  <title>Programările mele</title>
+</head>
+<body>
+  <h1>Programările mele</h1>
+
+  <% if (programari.length === 0) { %>
+    <p>Nu ai nicio programare încă.</p>
+  <% } else { %>
+    <ul>
+      <% programari.forEach(p => { %>
+        <li>
+          <strong><%= p.sessionId.tip %></strong>
+          — <%= new Date(p.data).toLocaleDateString('ro-RO') %> la <%= p.ora %>
+          — <%= p.sessionId.pret %> RON
+          — Status: <%= p.status %>
+          <form action="/astro/programari/<%= p._id %>/delete" method="POST" style="display:inline">
+            <button type="submit" onclick="return confirm('Sigur ștergi programarea?')">Șterge</button>
+          </form>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <br>
+  <a class="btn" href="/astro">Înapoi la dashboard</a>
+</body>
+</html>

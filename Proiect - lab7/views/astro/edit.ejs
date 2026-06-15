@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/style.css">
+  <title>Editează Consultație</title>
+</head>
+<body class="<%= theme === 'dark' ? 'dark' : '' %>">
+  <h1>Editează Consultație</h1>
+
+  <% if (error) { %>
+    <p class="error"><%= error %></p>
+  <% } %>
+
+  <form action="/astro/<%= session._id %>/edit" method="POST">
+    <input type="text" name="tip" value="<%= session.tip %>" required />
+    <input type="text" name="durata" value="<%= session.durata %>" required />
+    <input type="number" name="pret" value="<%= session.pret %>" required />
+    <select name="categorie">
+      <option value="natal" <%= session.categorie === 'natal' ? 'selected' : '' %>>Natal</option>
+      <option value="tranzit" <%= session.categorie === 'tranzit' ? 'selected' : '' %>>Tranzit</option>
+      <option value="compatibilitate" <%= session.categorie === 'compatibilitate' ? 'selected' : '' %>>Compatibilitate</option>
+      <option value="general" <%= session.categorie === 'general' ? 'selected' : '' %>>General</option>
+    </select>
+    <textarea name="descriere" rows="4" style="width:250px"><%= session.descriere %></textarea>
+    <input type="text" name="include" value="<%= session.include ? session.include.join(', ') : '' %>" placeholder="Ce include (separat prin virgulă)" />
+    <button type="submit">Salvează</button>
+  </form>
+
+  <br>
+  <a class="btn" href="/astro">Înapoi la dashboard</a>
+</body>
+</html>

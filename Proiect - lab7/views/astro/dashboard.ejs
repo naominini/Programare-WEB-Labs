@@ -32,12 +32,23 @@
   <h2>Consultații disponibile</h2>
   <ul>
     <% sessions.forEach(s => { %>
-      <li>
-        <a href="/astro/<%= s.id %>"><%= s.tip %></a>
-        — <%= s.durata %> — <%= s.pret %>
+      <li style="display:flex; align-items:center; justify-content:center; gap:8px">
+        <a href="/astro/<%= s._id %>"><%= s.tip %></a>
+        — <%= s.durata %> — <%= s.pret %> RON
+        <a class="btn" href="/astro/<%= s._id %>/book">📅 Programează</a>
+        <a class="btn" href="/astro/<%= s._id %>/edit">✏️ Editează</a>
+        <form action="/astro/<%= s._id %>/delete" method="POST">
+          <button type="submit" onclick="return confirm('Sigur vrei să ștergi?')">🗑️ Șterge</button>
+        </form>
       </li>
     <% }) %>
   </ul>
+
+  <br>
+  <a class="btn" href="/astro/add">➕ Adaugă consultație</a>
+
+  <br>
+  <a class="btn" href="/astro/mine">📋 Programările mele</a>
 
   <br>
 

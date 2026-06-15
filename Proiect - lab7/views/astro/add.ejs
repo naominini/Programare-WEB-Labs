@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/style.css">
+  <title>Adaugă Consultație</title>
+</head>
+<body class="<%= theme === 'dark' ? 'dark' : '' %>">
+  <h1>Adaugă Consultație</h1>
+
+  <% if (error) { %>
+    <p class="error"><%= error %></p>
+  <% } %>
+
+  <form action="/astro/add" method="POST">
+    <input type="text" name="tip" placeholder="Tip consultație" required />
+    <input type="text" name="durata" placeholder="Durată (ex: 60 min)" required />
+    <input type="number" name="pret" placeholder="Preț (RON)" required />
+    <select name="categorie">
+      <option value="natal">Natal</option>
+      <option value="tranzit">Tranzit</option>
+      <option value="compatibilitate">Compatibilitate</option>
+      <option value="general">General</option>
+    </select>
+    <textarea name="descriere" placeholder="Descriere (minim 10 caractere)" rows="4" style="width:250px"></textarea>
+    <input type="text" name="include" placeholder="Ce include (separat prin virgulă)" />
+    <button type="submit">Adaugă</button>
+  </form>
+
+  <br>
+  <a class="btn" href="/astro">Înapoi la dashboard</a>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/style.css">
+  <title>Programează</title>
+</head>
+<body>
+  <h1>Programează: <%= session.tip %></h1>
+
+  <p>⏱ Durată: <%= session.durata %></p>
+  <p>💰 Preț: <%= session.pret %> RON</p>
+
+  <% if (error) { %>
+    <p class="error"><%= error %></p>
+  <% } %>
+
+  <form action="/astro/<%= session._id %>/book" method="POST">
+    <input type="date" name="data" required />
+    <input type="time" name="ora" required />
+    <button type="submit">Confirmă programarea</button>
+  </form>
+
+  <br>
+  <a class="btn" href="/astro/<%= session._id %>">Înapoi</a>
+</body>
+</html>

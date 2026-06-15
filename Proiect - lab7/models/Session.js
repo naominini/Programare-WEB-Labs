@@ -11,7 +11,8 @@ const sessionSchema = new mongoose.Schema({
     enum: ['natal', 'tranzit', 'compatibilitate', 'general'],
     default: 'general'
   },
-  descriere: { type: String, match: /^.{10,}$/ }
-}, { timestamps: true });
+  descriere: { type: String, match: /^.{10,}$/ },
+  include: [{ type: String }] 
+}, { timestamps: true }); 
 
 module.exports = mongoose.model('Session', sessionSchema);

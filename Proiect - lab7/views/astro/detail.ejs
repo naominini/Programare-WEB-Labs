@@ -10,18 +10,22 @@
 
   <h2>Detalii</h2>
   <p>⏱ Durată: <%= session.durata %></p>
-  <p>💰 Preț: <%= session.pret %></p>
+  <p>💰 Preț: <%= session.pret %> RON</p>
+  <p>📂 Categorie: <%= session.categorie %></p>
 
+  <% if (session.include && session.include.length > 0) { %>
   <h2>Ce include</h2>
   <ul>
     <% session.include.forEach(item => { %>
-      <li>✦ <%= item %></li>
+      <li><%= item %></li>
     <% }) %>
   </ul>
+<% } %>
 
   <br>
+  <a class="btn" href="/astro/<%= session._id %>/book">📅 Programează</a>
   <a class="btn" href="/astro">Înapoi la dashboard</a>
   <a class="btn" href="/logout">Logout</a>
 
 </body>
-</html> 
+</html>
