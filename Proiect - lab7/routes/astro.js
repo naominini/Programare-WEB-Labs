@@ -8,27 +8,23 @@ router.get('/', requireLogin, (req, res) => {
   if (!req.session.views) req.session.views = 0;
   req.session.views++;
 
-  if (!req.cookies.theme) {
-    res.cookie('theme', 'light', { maxAge: 900000 });
-  }
-  const theme = req.cookies.theme || 'light';
 
   res.render('astro/dashboard', {
     user: req.session.user,
     views: req.session.views,
     sessions: sessions.getAll(),
-    theme
+    theme: res.locals.theme
   });
 });
 
 // GET /astro/theme/:val
 router.get('/theme/:val', requireLogin, (req, res) => {
-  res.cookie('theme', req.params.val, { maxAge: 900000 });
+  res.cookie('theme', req.params.val, { maxAge: 7 * 24 * 60 * 60 * 1000 }); // 7 zile
   res.redirect('/astro');
 });
 
 // GET /astro/:id - detaliu consultatie
-router.get('/:id', requireLogin, (req, res) => {
+router.get('/:id', requireLogin, (req, res) => {  
   const session = sessions.findById(req.params.id);
 
   if (!session) {

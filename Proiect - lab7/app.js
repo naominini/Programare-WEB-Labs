@@ -12,6 +12,11 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+app.use((req, res, next) => {
+  res.locals.theme = req.cookies.theme || 'light';
+  next();
+});
+
 // Session
 app.use(session({
   secret: process.env.SESSION_SECRET || 'secret',

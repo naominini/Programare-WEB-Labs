@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="/style.css">
   <title>Login</title>
 </head>
-<body>
+<body class="<%= theme === 'dark' ? 'dark' : '' %>">
   <h1>Login</h1>
 
   <% if (error) { %>
@@ -21,7 +21,7 @@
     <button type="submit">Login</button>
   </form>
 
-  <p>Nu ai cont? <a href="/register">Înregistrează-te</a></p>
+  <a class="btn" href="/register">Nu ai cont? Înregistrează-te</a>
 
 </body>
 </html>

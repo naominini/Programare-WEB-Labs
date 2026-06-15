@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="/style.css">
   <title><%= session.tip %></title>
 </head>
-<body>
+<body class="<%= theme === 'dark' ? 'dark' : '' %>">
   <h1><%= session.tip %></h1>
   <p><%= session.descriere %></p>
 
@@ -20,8 +20,8 @@
   </ul>
 
   <br>
-  <a href="/astro">Înapoi la dashboard</a>
-  <a href="/logout">Logout</a>
+  <a class="btn" href="/astro">Înapoi la dashboard</a>
+  <a class="btn" href="/logout">Logout</a>
 
 </body>
 </html> 

@@ -4,7 +4,13 @@
   <link rel="stylesheet" href="/style.css">
   <title>Dashboard</title>
 </head>
-<body>
+<body class="<%= theme === 'dark' ? 'dark' : '' %>">
+  <% if (theme === 'dark') { %>
+    <p><a class="theme-btn" href="/astro/theme/light">☀️ Schimbă la light</a></p>
+  <% } else { %>
+    <p><a class="theme-btn" href="/astro/theme/dark">🌙 Schimbă la dark</a></p>
+  <% } %>
+  
   <h1>✦ Online Astrology Consultation ✦</h1>
   <p><i>Discover yourself through the wisdom of the stars</i></p>
 
@@ -35,7 +41,7 @@
 
   <br>
 
-  <a href="/logout">Logout</a>
+  <a class="btn" href="/logout">Logout</a>
 
 </body>
 </html>

@@ -5,11 +5,16 @@
 }
 
 body {
-  background-color: #00003f;
+  background-color: #92b3ca;
   color: #ffffff;
   font-family: Arial, sans-serif;
   padding: 40px;
   text-align: center;
+}
+
+body.dark {
+  background-color: #1f1f3c;
+  color: #e0e0e0;
 }
 
 h1, h2 {
@@ -56,7 +61,7 @@ ul {
 }
 
 ul li {
-  margin: 10px 0;
+  margin: 20px 0;
   font-size: 18px;
 }
 
@@ -66,4 +71,67 @@ p {
 
 .error {
   color: #ff6666;
+}
+
+ul li a {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 6px 14px;
+  border-radius: 20px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+}
+
+body.dark ul li a {
+  background-color: rgba(170, 170, 255, 0.2);
+  color: #aaaaff;
+}
+
+body.dark ul li a:hover {
+  background-color: rgba(170, 170, 255, 0.4);
+}
+
+/* buton theme */
+.theme-btn {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.25);
+  padding: 6px 16px;
+  border-radius: 20px;
+  color: #ffffff;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.theme-btn:hover {
+  background-color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+}
+
+body.dark .theme-btn {
+  background-color: rgba(170, 170, 255, 0.2);
+  color: #aaaaff;
+}
+
+.btn {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.25);
+  padding: 6px 16px;
+  border-radius: 20px;
+  color: #ffffff;
+  font-weight: bold;
+  margin: 6px;
+}
+
+.btn:hover {
+  background-color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+}
+
+body.dark .btn {
+  background-color: rgba(170, 170, 255, 0.2);
+  color: #aaaaff;
 }
