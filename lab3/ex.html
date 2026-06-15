@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Laborator 3 - JavaScript</title>
+</head>
+<body>
+
+  <script>
+    //1 - alert(), console.log(), document.write()
+    alert("Salut! Acesta este un alert.");
+    console.log("Mesaj in consola browserului");
+    document.write("Mesaj afisat in pagina cu document.write()<br>");
+
+    //2 - variabile student
+    let numeStudent = "Ana Popescu";
+    let anStudiu = 2;
+    let medie = 9.45;
+
+    console.log("Nume student:", numeStudent);
+    console.log("An de studiu:", anStudiu);
+    console.log("Medie:", medie);
+
+    //3 - functie suma si produs
+    function calculeaza(a, b) {
+      var suma = a + b;
+      var produs = a * b;
+      console.log("Suma:", suma);
+      console.log("Produsul:", produs);
+    }
+
+    calculeaza(4, 7);
+
+    //4 - array cu forEach si map
+    var numere = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    console.log("forEach:");
+    numere.forEach(function(val) {
+      console.log(val);
+    });
+
+    var duble = numere.map(function(val) {
+      return val * 2;
+    });
+    console.log("map (valorile dublate):", duble);
+
+    //  5 - obiect car
+    var car = {
+      brand: "Toyota",
+      model: "Corolla",
+      an: 2022
+    };
+
+    console.log("Brand:", car.brand);
+    console.log("Model:", car.model);
+    console.log("An:", car.an);
+  </script>
+
+</body>
+</html>
