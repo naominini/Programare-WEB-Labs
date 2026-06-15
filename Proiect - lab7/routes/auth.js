@@ -21,7 +21,7 @@ router.post('/register', async (req, res) => {
     const user = new User({ username: nume, email, password });
     await user.save();
 
-    req.session.user = { id: user._id, email: user.email, nume: user.username };
+    req.session.user = { id: user._id, email: user.email, nume: user.username, role: user.role };
     res.redirect('/astro');
   } catch (err) {
     if (err.code === 11000) {
@@ -52,7 +52,7 @@ router.post('/login', async (req, res) => {
       return res.render('login', { error: 'Email sau parolă greșită!', theme: res.locals.theme });
     }
 
-    req.session.user = { id: user._id, email: user.email, nume: user.username };
+    req.session.user = { id: user._id, email: user.email, nume: user.username, role: user.role };
     res.redirect('/astro');
   } catch (err) {
     res.render('login', { error: 'Eroare la autentificare!', theme: res.locals.theme });

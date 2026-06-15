@@ -22,6 +22,9 @@
             — <%= new Date(p.data).toLocaleDateString('ro-RO') %> la <%= p.ora %>
           <% } %>
             — Status: <%= p.status %>
+            <% if (isAdmin) { %>
+              <small>📧 <%= p.userEmail %></small>
+            <% } %>
             <form action="/astro/programari/<%= p._id %>/delete" method="POST" style="display:inline">
               <button type="submit" onclick="return confirm('Sigur ștergi programarea?')">Șterge</button>
             </form>

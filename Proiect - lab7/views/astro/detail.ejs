@@ -21,6 +21,9 @@
     <% }) %>
   </ul>
 <% } %>
+<% if (session.createdBy) { %>
+  <p>👤 Creat de: <%= session.createdBy.username %></p>
+<% } %>
 
   <br>
   <a class="btn" href="/astro/<%= session._id %>/book">📅 Programează</a>

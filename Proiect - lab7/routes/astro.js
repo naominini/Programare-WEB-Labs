@@ -3,6 +3,7 @@ const router = express.Router();
 const requireLogin = require('../middleware/requireLogin');
 const Session = require('../models/Session');
 const Programare = require('../models/Programare');
+const requireAdmin = require('../middleware/requireAdmin');
 
 // GET /astro - listare + cautare + sortare
 router.get('/', requireLogin, async (req, res) => {
@@ -13,7 +14,9 @@ router.get('/', requireLogin, async (req, res) => {
   let query = {};
   if (search) query.tip = { $regex: search, $options: 'i' };
 
-  const sessions = await Session.find(query).sort(sort ? { [sort]: 1 } : { dataAdaugata: -1 });
+  const sessions = await Session.find(query)
+  .populate('createdBy', 'username email')
+  .sort(sort ? { [sort]: 1 } : { dataAdaugata: -1 });
 
   res.render('astro/dashboard', {
     user: req.session.user,
@@ -26,7 +29,7 @@ router.get('/', requireLogin, async (req, res) => {
 });
 
 // GET /astro/add - formular adaugare
-router.get('/add', requireLogin, (req, res) => {
+router.get('/add', requireAdmin, (req, res) => {
   res.render('astro/add', { 
     user: req.session.user, 
     error: null,
@@ -35,7 +38,7 @@ router.get('/add', requireLogin, (req, res) => {
 });
 
 // POST /astro/add - salveaza in MongoDB
-router.post('/add', requireLogin, async (req, res) => {
+router.post('/add', requireAdmin, async (req, res) => {
   try {
     const { tip, durata, pret, descriere, categorie, include } = req.body;
     const includeArray = include ? include.split(',').map(s => s.trim()).filter(Boolean) : [];
@@ -52,13 +55,18 @@ router.post('/add', requireLogin, async (req, res) => {
 
 // GET /astro/mine - programarile mele
 router.get('/mine', requireLogin, async (req, res) => {
-  const programari = await Programare.find({ userEmail: req.session.user.email })
+  const isAdmin = req.session.user.role === 'admin';
+  
+  const programari = await Programare.find(
+    isAdmin ? {} : { userEmail: req.session.user.email }
+  )
     .populate('sessionId')
     .sort({ data: 1 });
 
   res.render('astro/mine', { 
     user: req.session.user, 
     programari,
+    isAdmin,
     theme: req.session.theme || 'light'
   });
 });
@@ -104,7 +112,7 @@ router.post('/programari/:id/delete', requireLogin, async (req, res) => {
 });
 
 // GET /astro/:id/edit - formular editare
-router.get('/:id/edit', requireLogin, async (req, res) => {
+router.get('/:id/edit', requireAdmin, async (req, res) => {
   try {
     const session = await Session.findById(req.params.id);
     if (!session) return res.redirect('/astro');
@@ -120,7 +128,7 @@ router.get('/:id/edit', requireLogin, async (req, res) => {
 });
 
 // POST /astro/:id/edit - actualizeaza
-router.post('/:id/edit', requireLogin, async (req, res) => {
+router.post('/:id/edit', requireAdmin, async (req, res) => {
   try {
     const { tip, durata, pret, descriere, categorie, include } = req.body;
     const includeArray = include ? include.split(',').map(s => s.trim()).filter(Boolean) : [];
@@ -142,7 +150,7 @@ router.post('/:id/edit', requireLogin, async (req, res) => {
 });
 
 // POST /astro/:id/delete - sterge
-router.post('/:id/delete', requireLogin, async (req, res) => {
+router.post('/:id/delete', requireAdmin, async (req, res) => {
   await Session.findByIdAndDelete(req.params.id);
   res.redirect('/astro');
 });
@@ -150,7 +158,7 @@ router.post('/:id/delete', requireLogin, async (req, res) => {
 // GET /astro/:id - detalii
 router.get('/:id', requireLogin, async (req, res) => {
   try {
-    const session = await Session.findById(req.params.id);
+    const session = await Session.findById(req.params.id).populate('createdBy', 'username email');
     if (!session) return res.render('astro/404', { user: req.session.user, theme: req.session.theme || 'light' });
     res.render('astro/detail', { 
       user: req.session.user, 
