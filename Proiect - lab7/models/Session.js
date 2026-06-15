@@ -12,7 +12,8 @@ const sessionSchema = new mongoose.Schema({
     default: 'general'
   },
   descriere: { type: String, match: /^.{10,}$/ },
-  include: [{ type: String }] 
+  include: [{ type: String }],
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' } 
 }, { timestamps: true }); 
 
 module.exports = mongoose.model('Session', sessionSchema);

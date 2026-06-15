@@ -18,18 +18,16 @@ router.post('/register', async (req, res) => {
   const { email, password, nume } = req.body;
 
   try {
-    const existing = await User.findOne({ email });
-    if (existing) {
-      return res.render('register', { error: 'Email deja folosit!', theme: res.locals.theme });
-    }
-
     const user = new User({ username: nume, email, password });
     await user.save();
 
-    req.session.user = { email, nume };
+    req.session.user = { id: user._id, email: user.email, nume: user.username };
     res.redirect('/astro');
   } catch (err) {
-    console.error('EROARE REGISTER:', err.message);
+    if (err.code === 11000) {
+      const camp = Object.keys(err.keyValue)[0];
+      return res.render('register', { error: `${camp} deja folosit!`, theme: res.locals.theme });
+    }
     res.render('register', { error: 'Eroare la înregistrare!', theme: res.locals.theme });
   }
 });
@@ -54,7 +52,7 @@ router.post('/login', async (req, res) => {
       return res.render('login', { error: 'Email sau parolă greșită!', theme: res.locals.theme });
     }
 
-    req.session.user = { email: user.email, nume: user.username };
+    req.session.user = { id: user._id, email: user.email, nume: user.username };
     res.redirect('/astro');
   } catch (err) {
     res.render('login', { error: 'Eroare la autentificare!', theme: res.locals.theme });

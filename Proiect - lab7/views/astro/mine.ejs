@@ -13,13 +13,18 @@
     <ul>
       <% programari.forEach(p => { %>
         <li>
-          <strong><%= p.sessionId.tip %></strong>
-          — <%= new Date(p.data).toLocaleDateString('ro-RO') %> la <%= p.ora %>
-          — <%= p.sessionId.pret %> RON
-          — Status: <%= p.status %>
-          <form action="/astro/programari/<%= p._id %>/delete" method="POST" style="display:inline">
-            <button type="submit" onclick="return confirm('Sigur ștergi programarea?')">Șterge</button>
-          </form>
+          <% if (p.sessionId) { %>
+            <strong><%= p.sessionId.tip %></strong>
+            — <%= new Date(p.data).toLocaleDateString('ro-RO') %> la <%= p.ora %>
+            — <%= p.sessionId.pret %> RON
+          <% } else { %>
+            <strong>Consultație ștearsă</strong>
+            — <%= new Date(p.data).toLocaleDateString('ro-RO') %> la <%= p.ora %>
+          <% } %>
+            — Status: <%= p.status %>
+            <form action="/astro/programari/<%= p._id %>/delete" method="POST" style="display:inline">
+              <button type="submit" onclick="return confirm('Sigur ștergi programarea?')">Șterge</button>
+            </form>
         </li>
       <% }) %>
     </ul>

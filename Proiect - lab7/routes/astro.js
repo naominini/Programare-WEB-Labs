@@ -39,7 +39,7 @@ router.post('/add', requireLogin, async (req, res) => {
   try {
     const { tip, durata, pret, descriere, categorie, include } = req.body;
     const includeArray = include ? include.split(',').map(s => s.trim()).filter(Boolean) : [];
-    await Session.create({ tip, durata, pret, descriere, categorie, include: includeArray });
+    await Session.create({ tip, durata, pret, descriere, categorie, include: includeArray, createdBy: req.session.user.id });
     res.redirect('/astro');
   } catch (err) {
     res.render('astro/add', { 
