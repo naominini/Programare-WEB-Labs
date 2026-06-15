@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const users = require('../db/users');
+const User = require('../models/User');
+const bcrypt = require('bcrypt');
 
 // GET /
 router.get('/', (req, res) => {
@@ -13,16 +14,24 @@ router.get('/register', (req, res) => {
 });
 
 // POST /register
-router.post('/register', (req, res) => {  
+router.post('/register', async (req, res) => {
   const { email, password, nume } = req.body;
 
-  if (users.findByEmail(email)) {
-   return res.render('register', { error: 'Email deja folosit!', theme: res.locals.theme });
-  }
+  try {
+    const existing = await User.findOne({ email });
+    if (existing) {
+      return res.render('register', { error: 'Email deja folosit!', theme: res.locals.theme });
+    }
 
-  users.add({ email, password, nume });
-  req.session.user = { email, nume };
-  res.redirect('/astro');
+    const user = new User({ username: nume, email, password });
+    await user.save();
+
+    req.session.user = { email, nume };
+    res.redirect('/astro');
+  } catch (err) {
+    console.error('EROARE REGISTER:', err.message);
+    res.render('register', { error: 'Eroare la înregistrare!', theme: res.locals.theme });
+  }
 });
 
 // GET /login
@@ -31,16 +40,25 @@ router.get('/login', (req, res) => {
 });
 
 // POST /login
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   const { email, password } = req.body;
-  const user = users.findByEmail(email);
 
-  if (!user || user.password !== password) {
-    return res.render('login', { error: 'Email sau parolă greșită!', theme: res.locals.theme });
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.render('login', { error: 'Email sau parolă greșită!', theme: res.locals.theme });
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      return res.render('login', { error: 'Email sau parolă greșită!', theme: res.locals.theme });
+    }
+
+    req.session.user = { email: user.email, nume: user.username };
+    res.redirect('/astro');
+  } catch (err) {
+    res.render('login', { error: 'Eroare la autentificare!', theme: res.locals.theme });
   }
-
-  req.session.user = { email: user.email, nume: user.nume };
-  res.redirect('/astro');
 });
 
 // GET /logout
